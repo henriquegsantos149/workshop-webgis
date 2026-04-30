@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Optimization for Paid Traffic (Connect Rate) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="bg-network.png" as="image">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop WebGIS Na Prática | Ambiental Pro</title>
     <meta name="description" content="Aprenda a criar um geoportal funcional começando do zero no QGIS. Aula exclusiva no Google Meet.">
+    
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Deferred/Pre-loaded assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Hero Section -->
@@ -17,22 +26,25 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <img src="logo-ambientalpro.png" alt="Ambiental Pro" style="height: 80px; margin-bottom: 20px; display: block;" loading="lazy">
-                    <span class="aula-magna">AULA NO GOOGLE MEET</span>
+                    <img src="logo-ambientalpro.png" alt="Ambiental Pro"
+                        style="height: 80px; margin-bottom: 20px; display: block;">
+                    <span class="aula-magna">AO VIVO NO GOOGLE MEET</span>
                     <h1>
                         WORKSHOP<br>
                         <span class="highlight">WEBGIS NA PRÁTICA</span><br>
                         <span style="white-space: nowrap;">DO QGIS AO GEOPORTAL</span>
                     </h1>
                     <p class="disclaimer">Vagas limitadas para interação ao vivo</p>
-                    <p class="main-p">O passo a passo definitivo para você transformar camadas do QGIS em um Geoportal funcional e interativo.</p>
-                    <p class="sub-p">Aprenda a estruturar seus dados, configurar servidores de mapas e publicar sua primeira plataforma WebGIS do zero, de forma prática e profissional.</p>
+                    <p class="main-p">O passo a passo definitivo para você transformar camadas do QGIS em um Geoportal
+                        funcional e interativo.</p>
+                    <p class="sub-p">Aprenda a estruturar seus dados, configurar servidores de mapas e publicar sua
+                        primeira plataforma WebGIS do zero, de forma prática e profissional.</p>
                 </div>
-                
+
                 <div class="hero-form">
                     <div class="form-card">
                         <h3>Garanta sua participação abaixo</h3>
-                        
+
                         <form id="registrationForm">
                             <div class="input-group">
                                 <label>Nome Completo</label>
@@ -51,7 +63,8 @@
                         <div id="successMessage" class="success-message" style="display: none;">
                             <i class="fas fa-check-circle"></i>
                             <h3>Inscrição Confirmada!</h3>
-                            <p>Parabéns! Seus dados foram enviados e sua vaga está garantida. Em breve entraremos em contato.</p>
+                            <p>Parabéns! Seus dados foram enviados e sua vaga está garantida. Em breve entraremos em
+                                contato.</p>
                         </div>
                         <p class="form-footer"><i class="fas fa-lock"></i> Seus dados estão 100% protegidos.</p>
                     </div>
@@ -97,14 +110,17 @@
                     <ul class="preview-list">
                         <li><strong>Extração e Tratamento:</strong> Como preparar dados no QGIS para a web.</li>
                         <li><strong>Servidores de Mapas:</strong> Onde hospedar e como configurar seu geoportal.</li>
-                        <li><strong>Interface Interativa:</strong> Criação de menus, filtros e ferramentas de busca.</li>
-                        <li><strong>Publicação Final:</strong> O processo de colocar seu Geoportal no ar para o mundo.</li>
+                        <li><strong>Interface Interativa:</strong> Criação de menus, filtros e ferramentas de busca.
+                        </li>
+                        <li><strong>Publicação Final:</strong> O processo de colocar seu Geoportal no ar para o mundo.
+                        </li>
                     </ul>
                 </div>
                 <div class="preview-info">
                     <div class="feature-card dark-card">
                         <h3>Projeto Prático</h3>
-                        <p>Durante a aula, você verá a construção de um projeto real, focado nas demandas atuais do mercado de geotecnologias.</p>
+                        <p>Durante a aula, você verá a construção de um projeto real, focado nas demandas atuais do
+                            mercado de geotecnologias.</p>
                         <hr style="margin: 20px 0; opacity: 0.1;">
                         <div class="event-details">
                             <div><span><strong>Data:</strong> 20 de Maio de 2026</span></div>
@@ -124,16 +140,25 @@
                     <img src="foto-henrique.jpg" alt="Henrique - Diretor Pedagógico">
                 </div>
                 <div class="instructor-content">
-                    <span class="badge" style="background: var(--secondary); color: white; margin-bottom: 20px;">DIRETOR PEDAGÓGICO</span>
+                    <span class="badge" style="background: var(--secondary); color: white; margin-bottom: 20px;">DIRETOR
+                        PEDAGÓGICO</span>
                     <h2>APRENDA DIRETAMENTE COM O DIRETOR PEDAGÓGICO DA AMBIENTAL PRO</h2>
-                    <p>Henrique percebeu que o mercado está cheio de profissionais que passam anos na faculdade, mas congelam diante de um projeto real. Viu de perto a frustração de quem tenta decorar manuais, mas continua com salários estagnados por não saber resolver os problemas práticos que as empresas e municípios realmente enfrentam.</p>
-                    <p>Com base em sua vivência na Universidade de Tecnologia de Sydney (Austrália), adaptou para o Brasil um método focado 100% na resolução de problemas reais. Nada de decoreba acadêmica inútil: o foco é pegar o dado bruto, aplicar a geotecnologia correta e entregar um resultado que vale dinheiro no mercado.</p>
-                    
+                    <p>Henrique percebeu que o mercado está cheio de profissionais que passam anos na faculdade, mas
+                        congelam diante de um projeto real. Viu de perto a frustração de quem tenta decorar manuais, mas
+                        continua com salários estagnados por não saber resolver os problemas práticos que as empresas e
+                        municípios realmente enfrentam.</p>
+                    <p>Com base em sua vivência na Universidade de Tecnologia de Sydney (Austrália), adaptou para o
+                        Brasil um método focado 100% na resolução de problemas reais. Nada de decoreba acadêmica inútil:
+                        o foco é pegar o dado bruto, aplicar a geotecnologia correta e entregar um resultado que vale
+                        dinheiro no mercado.</p>
+
                     <ul class="check-list">
                         <li><i class="fas fa-check-circle"></i> Sócio fundador da Ambiental Pro.</li>
                         <li><i class="fas fa-check-circle"></i> Treinou mais de 80.000 pessoas nos últimos 7 anos.</li>
-                        <li><i class="fas fa-check-circle"></i> Estruturou formações chanceladas com nota máxima (5) no MEC.</li>
-                        <li><i class="fas fa-check-circle"></i> Referência em congressos nacionais como o CONEAA e a SOEA.</li>
+                        <li><i class="fas fa-check-circle"></i> Estruturou formações chanceladas com nota máxima (5) no
+                            MEC.</li>
+                        <li><i class="fas fa-check-circle"></i> Referência em congressos nacionais como o CONEAA e a
+                            SOEA.</li>
                     </ul>
                 </div>
             </div>
@@ -144,7 +169,8 @@
     <section id="inscricao" class="final-cta">
         <div class="container">
             <h2>Pronto para transformar sua carreira?</h2>
-            <p>As vagas para a aula no Google Meet são limitadas para garantir a qualidade da interação. Não perca essa chance.</p>
+            <p>As vagas para a aula no Google Meet são limitadas para garantir a qualidade da interação. Não perca essa
+                chance.</p>
             <button class="cta-button open-modal">GARANTIR MINHA VAGA AGORA</button>
         </div>
     </section>
@@ -154,7 +180,8 @@
         <div class="container">
             <img src="logo-ambientalpro.png" alt="Ambiental Pro" class="footer-logo">
             <p>&copy; 2026 Ambiental Pro - Todos os direitos reservados.</p>
-            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">Workshop WebGIS Na Prática: Do QGIS ao Geoportal</p>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">Workshop WebGIS Na Prática: Do QGIS ao
+                Geoportal</p>
         </div>
     </footer>
 
@@ -196,4 +223,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
