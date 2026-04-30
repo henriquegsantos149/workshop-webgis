@@ -112,24 +112,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Intersection Observer (com fail-safe)
-    const sections = document.querySelectorAll('section, .feature-card, .hero-content');
-    if ('IntersectionObserver' in window) {
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(el => {
-            observer.observe(el);
-        });
-    } else {
-        // Fallback para navegadores sem suporte
-        sections.forEach(el => el.classList.add('revealed'));
-    }
 });

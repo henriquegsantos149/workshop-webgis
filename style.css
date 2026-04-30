@@ -776,14 +776,4 @@ body, html {
     width: 100%;
 }
 
-/* --- Animations --- */
-section, .feature-card, .hero-content {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
 
-section.revealed, .feature-card.revealed, .hero-content.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
