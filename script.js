@@ -41,49 +41,89 @@ setTimeout(() => {
     }
 }, 100);
 
-// Google Apps Script Integration
-// IMPORTANTE: Substitua pela URL gerada ao implantar o script na sua planilha
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyjfp5lN2POiyCTQgYP52STQO1gKkJmRy9L2JiJ48hZF8DnLYyhlylTfIde_NCt0SCb/exec';
+// Modal Logic
+const modalOverlay = document.getElementById('modalOverlay');
+const openModalButtons = document.querySelectorAll('.open-modal');
+const closeModalButton = document.querySelector('.close-modal');
 
-const registrationForm = document.getElementById('registrationForm');
-if (registrationForm) {
-    registrationForm.addEventListener('submit', (e) => {
+const toggleModal = (show) => {
+    if (show) {
+        modalOverlay.style.display = 'flex';
+        setTimeout(() => modalOverlay.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+    } else {
+        modalOverlay.classList.remove('active');
+        setTimeout(() => {
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+};
+
+openModalButtons.forEach(btn => {
+    btn.addEventListener('click', () => toggleModal(true));
+});
+
+closeModalButton.addEventListener('click', () => toggleModal(false));
+
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) toggleModal(false);
+});
+
+// Generic Form Handler
+const handleFormSubmission = (formId) => {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const submitBtn = registrationForm.querySelector('button');
+        const nome = form.querySelector('input[type="text"]').value.trim();
+        const email = form.querySelector('input[type="email"]').value.trim();
+        const whatsapp = form.querySelector('input[type="tel"]').value.trim();
+        
+        // Validation
+        if (!nome || !email || !whatsapp) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor, insira um e-mail válido.');
+            return;
+        }
+
+        // Brazilian WhatsApp Regex (simple version: (XX) XXXXX-XXXX or XX XXXXX-XXXX or XXXXXXXXXXX)
+        const whatsappRegex = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+        if (!whatsappRegex.test(whatsapp.replace(/\s/g, ''))) {
+             // If not matching strict, check if at least it has 10-11 digits
+             const digits = whatsapp.replace(/\D/g, '');
+             if (digits.length < 10 || digits.length > 11) {
+                alert('Por favor, insira um WhatsApp válido com DDD.');
+                return;
+             }
+        }
+
+        const submitBtn = form.querySelector('button');
         const originalBtnText = submitBtn.innerText;
         
         submitBtn.disabled = true;
         submitBtn.innerText = 'ENVIANDO...';
 
         const formData = {
-            nome: registrationForm.querySelector('input[type="text"]').value,
-            email: registrationForm.querySelector('input[type="email"]').value,
-            whatsapp: registrationForm.querySelector('input[type="tel"]').value
+            nome: nome,
+            email: email,
+            whatsapp: whatsapp
         };
 
-        // Envio para o Google Apps Script
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors', 
-            cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-        .then(() => {
-            alert('Obrigado por se inscrever! Seus dados foram salvos na planilha com sucesso.');
-            registrationForm.reset();
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Ocorreu um erro ao salvar os dados. Verifique a conexão ou a URL do script.');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerText = originalBtnText;
-        });
+        // Redirect to checkout immediately
+        window.location.href = 'https://pay.voompcreators.com.br/14529';
     });
-}
+};
+
+handleFormSubmission('registrationForm');
+handleFormSubmission('modalRegistrationForm');
 
 // Sticky CTA Visibility
 const stickyCta = document.getElementById('stickyCta');

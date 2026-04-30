@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop WebGIS Na Prática | Ambiental Pro</title>
     <meta name="description" content="Aprenda a criar um geoportal funcional começando do zero no QGIS. Aula exclusiva no Google Meet.">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
@@ -18,7 +19,11 @@
                 <div class="hero-content">
                     <img src="logo-ambientalpro.png" alt="Ambiental Pro" style="height: 80px; margin-bottom: 20px; display: block;">
                     <span class="aula-magna">AULA NO GOOGLE MEET</span>
-                    <h1>WORKSHOP <span class="highlight">WEBGIS NA PRÁTICA</span> DO QGIS AO GEOPORTAL</h1>
+                    <h1>
+                        WORKSHOP<br>
+                        <span class="highlight">WEBGIS NA PRÁTICA</span><br>
+                        <span style="white-space: nowrap;">DO QGIS AO GEOPORTAL</span>
+                    </h1>
                     <p class="disclaimer">Vagas limitadas para interação ao vivo</p>
                     <p class="main-p">O passo a passo definitivo para você transformar camadas do QGIS em um Geoportal funcional e interativo.</p>
                     <p class="sub-p">Aprenda a estruturar seus dados, configurar servidores de mapas e publicar sua primeira plataforma WebGIS do zero, de forma prática e profissional.</p>
@@ -43,6 +48,11 @@
                             </div>
                             <button type="submit" class="cta-button">GARANTIR MINHA VAGA AGORA</button>
                         </form>
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Inscrição Confirmada!</h3>
+                            <p>Parabéns! Seus dados foram enviados e sua vaga está garantida. Em breve entraremos em contato.</p>
+                        </div>
                         <p class="form-footer"><i class="fas fa-lock"></i> Seus dados estão 100% protegidos.</p>
                     </div>
                 </div>
@@ -135,7 +145,7 @@
         <div class="container">
             <h2>Pronto para transformar sua carreira?</h2>
             <p>As vagas para a aula no Google Meet são limitadas para garantir a qualidade da interação. Não perca essa chance.</p>
-            <a href="#registrationForm" class="cta-button">GARANTIR MINHA VAGA AGORA</a>
+            <button class="cta-button open-modal">GARANTIR MINHA VAGA AGORA</button>
         </div>
     </section>
 
@@ -150,7 +160,38 @@
 
     <!-- Sticky CTA -->
     <div class="sticky-cta" id="stickyCta">
-        <a href="#registrationForm" class="cta-button sticky-btn">QUERO ME INSCREVER</a>
+        <button class="cta-button sticky-btn open-modal">QUERO ME INSCREVER</button>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <button class="close-modal">&times;</button>
+            <div class="form-card">
+                <h3>Garanta sua participação abaixo</h3>
+                <form id="modalRegistrationForm">
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="Digite seu melhor e-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <label>WhatsApp</label>
+                        <input type="tel" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <button type="submit" class="cta-button">GARANTIR MINHA VAGA AGORA</button>
+                </form>
+                <div id="modalSuccessMessage" class="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Inscrição Confirmada!</h3>
+                    <p>Parabéns! Sua vaga está garantida. Em breve entraremos em contato.</p>
+                </div>
+                <p class="form-footer"><i class="fas fa-lock"></i> Seus dados estão 100% protegidos.</p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
