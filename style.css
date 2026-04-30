@@ -570,22 +570,20 @@ footer {
         text-align: center;
     }
     
-    .hero-badges {
-        justify-content: center;
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    
+
     .hero-content h1 {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
     
     .features-grid {
         grid-template-columns: 1fr;
     }
     
-    .hero-image {
-        order: -1;
-    }
-
     .instructor-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -600,4 +598,70 @@ footer {
     .check-list li {
         justify-content: center;
     }
+
+    .form-card {
+        margin: 40px auto 0;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Remove nowrap on mobile to prevent overflow */
+    .hero-content h1 span[style*="white-space: nowrap"] {
+        white-space: normal !important;
+    }
+
+    .preview-grid {
+        gap: 40px;
+    }
+
+    .sticky-cta {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .sticky-btn {
+        padding: 15px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .modal-card {
+        padding: 10px;
+    }
+}
+
+/* Fix for horizontal scroll */
+body, html {
+    overflow-x: hidden;
+    width: 100%;
 }
