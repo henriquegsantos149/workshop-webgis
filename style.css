@@ -658,6 +658,10 @@ footer {
     .modal-card {
         padding: 10px;
     }
+
+    .event-details div span {
+        font-size: 1.1rem;
+    }
 }
 
 /* Fix for horizontal scroll */
