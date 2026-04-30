@@ -1,10 +1,17 @@
+console.log('Script WebGIS v1.2 carregado');
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM totalmente carregado');
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#' || !href.startsWith('#')) return;
+            
+            const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -14,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // FAQ Accordion
     const faqItems = document.querySelectorAll('.faq-item');
+    console.log('FAQ itens encontrados:', faqItems.length);
+    
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         if (question) {
@@ -27,33 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Simple Scroll Reveal
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('section, .feature-card, .hero-content, .instructor-image, .instructor-content').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s ease-out';
-        observer.observe(el);
-    });
-
     // Modal Logic
     const modal = document.getElementById('registrationModal');
     const openModalButtons = document.querySelectorAll('.open-modal');
     const closeModal = document.querySelector('.close-modal');
 
+    console.log('Botões de modal encontrados:', openModalButtons.length);
+
     if (modal) {
         openModalButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
+                console.log('Abrindo modal');
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -78,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupForm(formId) {
         const form = document.getElementById(formId);
         if (form) {
+            console.log('Configurando formulário:', formId);
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const name = form.querySelector('input[type="text"]').value;
@@ -95,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                console.log('Redirecionando para checkout...');
                 window.location.href = "https://pay.voompcreators.com.br/14529";
             });
         }
@@ -106,12 +102,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sticky CTA Visibility
     const stickyCta = document.querySelector('.sticky-cta');
     if (stickyCta) {
+        console.log('Sticky CTA configurado');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 500) {
-                stickyCta.classList.add('visible'); // Match CSS class
+                stickyCta.classList.add('visible');
             } else {
                 stickyCta.classList.remove('visible');
             }
         });
+    }
+
+    // Intersection Observer (com fail-safe)
+    const sections = document.querySelectorAll('section, .feature-card, .hero-content');
+    if ('IntersectionObserver' in window) {
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(el => {
+            observer.observe(el);
+        });
+    } else {
+        // Fallback para navegadores sem suporte
+        sections.forEach(el => el.classList.add('revealed'));
     }
 });
