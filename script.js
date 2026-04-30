@@ -11,6 +11,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// FAQ Accordion
+document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (question) {
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    });
+});
+
 // Simple Scroll Reveal
 const observerOptions = {
     threshold: 0.1
@@ -32,110 +54,74 @@ document.querySelectorAll('section, .feature-card, .hero-content, .instructor-im
     observer.observe(el);
 });
 
-// Fade in Hero content faster
-setTimeout(() => {
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-    }
-}, 100);
-
 // Modal Logic
-const modalOverlay = document.getElementById('modalOverlay');
+const modal = document.getElementById('registrationModal');
 const openModalButtons = document.querySelectorAll('.open-modal');
-const closeModalButton = document.querySelector('.close-modal');
+const closeModal = document.querySelector('.close-modal');
 
-const toggleModal = (show) => {
-    if (show) {
-        modalOverlay.style.display = 'flex';
-        setTimeout(() => modalOverlay.classList.add('active'), 10);
-        document.body.style.overflow = 'hidden';
-    } else {
-        modalOverlay.classList.remove('active');
-        setTimeout(() => {
-            modalOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-};
-
-openModalButtons.forEach(btn => {
-    btn.addEventListener('click', () => toggleModal(true));
-});
-
-closeModalButton.addEventListener('click', () => toggleModal(false));
-
-modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) toggleModal(false);
-});
-
-// Generic Form Handler
-const handleFormSubmission = (formId) => {
-    const form = document.getElementById(formId);
-    if (!form) return;
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const nome = form.querySelector('input[type="text"]').value.trim();
-        const email = form.querySelector('input[type="email"]').value.trim();
-        const whatsapp = form.querySelector('input[type="tel"]').value.trim();
-        
-        // Validation
-        if (!nome || !email || !whatsapp) {
-            alert('Por favor, preencha todos os campos.');
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Por favor, insira um e-mail válido.');
-            return;
-        }
-
-        // Brazilian WhatsApp Regex (simple version: (XX) XXXXX-XXXX or XX XXXXX-XXXX or XXXXXXXXXXX)
-        const whatsappRegex = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
-        if (!whatsappRegex.test(whatsapp.replace(/\s/g, ''))) {
-             // If not matching strict, check if at least it has 10-11 digits
-             const digits = whatsapp.replace(/\D/g, '');
-             if (digits.length < 10 || digits.length > 11) {
-                alert('Por favor, insira um WhatsApp válido com DDD.');
-                return;
-             }
-        }
-
-        const submitBtn = form.querySelector('button');
-        const originalBtnText = submitBtn.innerText;
-        
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'ENVIANDO...';
-
-        const formData = {
-            nome: nome,
-            email: email,
-            whatsapp: whatsapp
-        };
-
-        // Redirect to checkout immediately
-        window.location.href = 'https://pay.voompcreators.com.br/14529';
+if (modal) {
+    openModalButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
     });
-};
 
-handleFormSubmission('registrationForm');
-handleFormSubmission('modalRegistrationForm');
+    closeModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+// Form Submission Logic
+function setupForm(formId, successId) {
+    const form = document.getElementById(formId);
+    const successMessage = document.getElementById(successId);
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = form.querySelector('input[type="text"]').value;
+            const email = form.querySelector('input[type="email"]').value;
+            const whatsapp = form.querySelector('input[type="tel"]').value;
+
+            if (!name || !email || !whatsapp) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            // Simple Email Regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um e-mail válido.');
+                return;
+            }
+
+            // Redirect to Checkout
+            window.location.href = "https://pay.voompcreators.com.br/14529";
+        });
+    }
+}
+
+setupForm('registrationForm', 'successMessage');
+setupForm('modalRegistrationForm', 'modalSuccessMessage');
 
 // Sticky CTA Visibility
-const stickyCta = document.getElementById('stickyCta');
-const heroSection = document.querySelector('.hero');
-
-window.addEventListener('scroll', () => {
-    if (heroSection && stickyCta) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        if (heroBottom < 0) {
-            stickyCta.classList.add('visible');
+const stickyCta = document.querySelector('.sticky-cta');
+if (stickyCta) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            stickyCta.classList.add('active');
         } else {
-            stickyCta.classList.remove('visible');
+            stickyCta.classList.remove('active');
         }
-    }
-});
+    });
+}

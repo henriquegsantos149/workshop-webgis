@@ -4,14 +4,39 @@
     <!-- Optimization for Paid Traffic (Connect Rate) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
     <link rel="preload" href="bg-network.png" as="image">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop WebGIS Na Prática | Ambiental Pro</title>
-    <meta name="description" content="Aprenda a criar um geoportal funcional começando do zero no QGIS. Aula exclusiva no Google Meet.">
     
     <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MTZ9NFFN');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1373287802810243');
+    fbq('init', '738951835508714');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
     <link rel="stylesheet" href="style.css">
     
     <!-- Deferred/Pre-loaded assets -->
@@ -20,6 +45,17 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTZ9NFFN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Meta Pixel Code (noscript) -->
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1373287802810243&ev=PageView&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=738951835508714&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code (noscript) -->
 
     <!-- Hero Section -->
     <header class="hero">
@@ -135,12 +171,14 @@
         </div>
     </section>
 
+
+
     <!-- Instructor Section -->
     <section class="instructor">
         <div class="container">
             <div class="instructor-grid">
                 <div class="instructor-image">
-                    <img src="foto-henrique.jpg" alt="Henrique - Diretor Pedagógico">
+                    <img src="foto-henrique.jpg" alt="Henrique - Diretor Pedagógico" loading="lazy" decoding="async">
                 </div>
                 <div class="instructor-content">
                     <span class="badge" style="background: var(--secondary); color: white; margin-bottom: 20px;">DIRETOR
@@ -168,6 +206,73 @@
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container" style="text-align: center;">
+            <div class="section-header">
+                <h2>Invista no seu futuro profissional</h2>
+                <p style="opacity: 0.7; max-width: 700px; margin: 0 auto;">Garanta sua vaga com preço exclusivo de lançamento. O conhecimento prático que você precisa para se destacar no mercado.</p>
+            </div>
+            <div class="pricing-card">
+                <span class="badge" style="background: var(--vivid-teal); color: var(--primary); margin-bottom: 20px;">OFERTA DE LANÇAMENTO</span>
+                <p style="text-decoration: line-through; opacity: 0.5; margin-bottom: 5px;">De R$ 197,00</p>
+                <div class="price-value">R$ 39,90</div>
+                <p style="margin-top: 10px; opacity: 0.7;">Pagamento único. Evento exclusivo AO VIVO.</p>
+                
+                <ul style="list-style: none; padding: 0; margin: 25px auto; text-align: left; max-width: 280px; font-size: 0.95rem;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--vivid-teal); margin-right: 8px;"></i> Acesso à Aula no Google Meet</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--vivid-teal); margin-right: 8px;"></i> Certificado de Participação</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--vivid-teal); margin-right: 8px;"></i> Material Prático da Aula</li>
+                </ul>
+                <button class="cta-button open-modal" style="width: 100%; margin-top: 30px;">GARANTIR MINHA VAGA AGORA</button>
+                <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.85rem; opacity: 0.7;">
+                    <i class="fas fa-shield-alt"></i> Pagamento 100% Seguro
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dúvidas Frequentes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">O workshop será gravado? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Não. Este é um evento exclusivo e 100% ao vivo para garantir a interação e o foco dos participantes. Não haverá reprise ou gravação disponível posteriormente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Preciso de conhecimento prévio em programação? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Não. O workshop é focado em ferramentas visuais e configurações práticas. Não é necessário saber programar para criar seu primeiro Geoportal.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Quais ferramentas serão utilizadas? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Utilizaremos o QGIS para tratamento de dados e plataformas de publicação WebGIS modernas que não exigem codificação complexa.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Como receberei o link da aula? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>O link do Google Meet será enviado para o e-mail cadastrado e também via WhatsApp no dia do evento.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">O workshop oferece certificado? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Sim! Todos os participantes que acompanharem a aula ao vivo receberão um certificado de participação oficial da Ambiental Pro, excelente para valorizar seu currículo ou comprovar horas complementares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Final CTA -->
     <section id="inscricao" class="final-cta">
         <div class="container">
@@ -181,7 +286,11 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <img src="logo-ambientalpro.png" alt="Ambiental Pro" class="footer-logo">
+            <div class="footer-logos" style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+                <img src="logo-ambientalpro.png" alt="Ambiental Pro" class="footer-logo" loading="lazy" decoding="async">
+                <div style="width: 1px; height: 30px; background: rgba(0,0,0,0.1);"></div>
+                <img src="logo-workshop2.png" alt="Workshop WebGIS" style="height: 100px; opacity: 0.8;" loading="lazy" decoding="async">
+            </div>
             <p>&copy; 2026 Ambiental Pro - Todos os direitos reservados.</p>
             <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">Workshop WebGIS Na Prática: Do QGIS ao
                 Geoportal</p>
@@ -194,7 +303,7 @@
     </div>
 
     <!-- Registration Modal -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="registrationModal">
         <div class="modal-card">
             <button class="close-modal">&times;</button>
             <div class="form-card">
