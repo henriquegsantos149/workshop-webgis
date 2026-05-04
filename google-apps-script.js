@@ -17,33 +17,58 @@ function doPost(e) {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadsheet.getSheetByName("Leads") || spreadsheet.insertSheet("Leads");
   
-  // Garante que a planilha tenha cabeçalhos se estiver vazia
+  // Cabeçalhos básicos
+  var headers = ["Data/Hora", "Nome Completo", "E-mail", "WhatsApp"];
+  
+  // Inicializa planilha se estiver vazia
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(["Data/Hora", "Nome Completo", "E-mail", "WhatsApp"]);
-    sheet.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#f3f3f3");
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight("bold").setBackground("#f3f3f3");
   }
 
   try {
-    // Captura os dados no formato de formulário padrão (e.parameter)
-    var nome = e.parameter.nome || "Não informado";
-    var email = e.parameter.email || "Não informado";
-    var whatsapp = e.parameter.whatsapp || "Não informado";
+    // 1. Captura dados básicos
+    var rowData = {
+      "Data/Hora": Utilities.formatDate(new Date(), "GMT-3", "dd/MM/yyyy HH:mm:ss"),
+      "Nome Completo": e.parameter.nome || "Não informado",
+      "E-mail": e.parameter.email || "Não informado",
+      "WhatsApp": e.parameter.whatsapp || "Não informado"
+    };
+
+    // 2. Captura todas as UTMs dinamicamente
+    var allParams = e.parameter;
+    var utmKeys = Object.keys(allParams).filter(function(key) {
+      return key.toLowerCase().indexOf('utm_') === 0;
+    });
+
+    utmKeys.forEach(function(key) {
+      rowData[key] = allParams[key];
+    });
+
+    // 3. Gerencia colunas dinamicamente
+    var currentHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     
-    var timestamp = new Date();
-    var formattedDate = Utilities.formatDate(timestamp, "GMT-3", "dd/MM/yyyy HH:mm:ss");
-    
-    sheet.appendRow([formattedDate, nome, email, whatsapp]);
+    // Verifica se existem novas UTMs que precisam de colunas
+    Object.keys(rowData).forEach(function(key) {
+      if (currentHeaders.indexOf(key) === -1) {
+        sheet.getRange(1, sheet.getLastColumn() + 1).setValue(key)
+             .setFontWeight("bold").setBackground("#f3f3f3");
+        currentHeaders.push(key);
+      }
+    });
+
+    // 4. Prepara a linha final baseada na ordem das colunas
+    var finalRow = currentHeaders.map(function(header) {
+      return rowData[header] || "";
+    });
+
+    sheet.appendRow(finalRow);
     
     return ContentService.createTextOutput("Sucesso").setMimeType(ContentService.MimeType.TEXT);
     
   } catch (error) {
-    // Log para depuração no Apps Script
     console.error("Erro no processamento:", error.toString());
-    
-    return ContentService.createTextOutput(JSON.stringify({
-      "result": "error",
-      "message": error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput("Erro: " + error.toString()).setMimeType(ContentService.MimeType.TEXT);
   }
 }
 

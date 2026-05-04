@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Form Submission Logic
     const CHECKOUT_URL = "https://pay.voompcreators.com.br/14529";
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxryIrRryUzhM84oc256Lvkp5M_nePlmLgW8kt8aJmDX_ltJMwuuhBjaAd032nBSlXqcg/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTpG15UVZRXt1VzdPRbcgIsOh8S6h21COLXC3SyBrJ_OBY9yKzcgaTvO-j8wYXN8YW/exec";
 
     function setupForm(formId) {
         const form = document.getElementById(formId);
@@ -98,12 +98,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                // Captura todos os parâmetros UTM da URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const utms = {};
+                urlParams.forEach((value, key) => {
+                    if (key.toLowerCase().startsWith('utm_')) {
+                        utms[key] = value;
+                    }
+                });
+
                 // Envio usando URLSearchParams (form-urlencoded)
-                // Este é o método mais robusto para o Google Apps Script
                 const params = new URLSearchParams();
                 params.append('nome', data.nome);
                 params.append('email', data.email);
                 params.append('whatsapp', data.whatsapp);
+                
+                // Adiciona as UTMs capturadas ao envio
+                Object.keys(utms).forEach(key => {
+                    params.append(key, utms[key]);
+                });
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
