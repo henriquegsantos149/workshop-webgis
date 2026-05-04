@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Form Submission Logic
     const CHECKOUT_URL = "https://pay.voompcreators.com.br/14529";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxryIrRryUzhM84oc256Lvkp5M_nePlmLgW8kt8aJmDX_ltJMwuuhBjaAd032nBSlXqcg/exec";
 
     function setupForm(formId) {
         const form = document.getElementById(formId);
@@ -82,20 +83,39 @@ document.addEventListener('DOMContentLoaded', () => {
             log('Configurando form: ' + formId);
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                log('Form enviado: ' + formId);
+                log('Iniciando submissão rápida: ' + formId);
                 
-                const nameInput = form.querySelector('input[type="text"]');
-                const emailInput = form.querySelector('input[type="email"]');
-                const telInput = form.querySelector('input[type="tel"]');
+                const formData = new FormData(form);
+                const data = {
+                    nome: formData.get('nome'),
+                    email: formData.get('email'),
+                    whatsapp: formData.get('whatsapp')
+                };
 
-                if (!nameInput.value || !emailInput.value || !telInput.value) {
+                // Validação básica
+                if (!data.nome || !data.email || !data.whatsapp) {
                     alert('Por favor, preencha todos os campos.');
                     return;
                 }
 
-                // Redirect
-                log('Redirecionando para: ' + CHECKOUT_URL);
-                window.location.href = CHECKOUT_URL;
+                // Envio usando URLSearchParams (form-urlencoded)
+                // Este é o método mais robusto para o Google Apps Script
+                const params = new URLSearchParams();
+                params.append('nome', data.nome);
+                params.append('email', data.email);
+                params.append('whatsapp', data.whatsapp);
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    keepalive: true,
+                    body: params
+                }).catch(err => console.error('Erro no fetch:', err));
+
+                // Pequeno delay (300ms) para garantir o disparo
+                setTimeout(() => {
+                    window.location.href = CHECKOUT_URL;
+                }, 300);
             });
         }
     }
