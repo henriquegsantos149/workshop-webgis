@@ -466,7 +466,6 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 15px;
     transition: transform 0.5s ease;
-    animation: floatingCert 5s ease-in-out infinite;
 }
 
 .certificate-card img {
@@ -495,10 +494,6 @@ section {
     left: 150%;
 }
 
-@keyframes floatingCert {
-    0%, 100% { transform: translateY(0) rotateX(2deg) rotateY(-2deg); }
-    50% { transform: translateY(-15px) rotateX(-2deg) rotateY(2deg); }
-}
 
 @media (max-width: 992px) {
     .certificate-grid {
