@@ -558,7 +558,7 @@ section {
 }
 
 .check-list i {
-    color: var(--secondary);
+    color: var(--vivid-teal);
     font-size: 1.2rem;
 }
 
@@ -899,7 +899,7 @@ footer {
 
 .faq-question i {
     transition: transform 0.3s ease;
-    color: var(--secondary);
+    color: var(--vivid-teal);
 }
 
 .faq-answer {
