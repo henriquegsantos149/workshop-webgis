@@ -125,9 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: params
                 }).catch(err => console.error('Erro no fetch:', err));
 
+                // Adiciona as UTMs à URL de checkout
+                const finalCheckoutUrl = new URL(CHECKOUT_URL);
+                Object.keys(utms).forEach(key => {
+                    finalCheckoutUrl.searchParams.append(key, utms[key]);
+                });
+
                 // Pequeno delay (300ms) para garantir o disparo
                 setTimeout(() => {
-                    window.location.href = CHECKOUT_URL;
+                    window.location.href = finalCheckoutUrl.toString();
                 }, 300);
             });
         }
